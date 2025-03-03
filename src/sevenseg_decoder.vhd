@@ -37,11 +37,11 @@ entity sevenseg_decoder is
 end sevenseg_decoder;
 
 architecture Behavioral of sevenseg_decoder is
-    signal w_seg_n : std_logic_vector (6 downto 0);
+    signal w_seg : std_logic_vector (6 downto 0);
 begin
     -- controls segs
     with i_Hex select
-        w_seg_n <= "1111110" when X"0",
+        w_seg <= "1111110" when X"0",
                    "0110000" when X"1",
                    "1101101" when X"2",
                    "1111001" when X"3",
@@ -60,5 +60,11 @@ begin
                    "1111111" when others; -- All segments off
 
     -- Invert the final output to match lab
-    o_seg_n <= NOT w_seg_n;
+    o_seg_n(0) <= NOT w_seg(6);
+    o_seg_n(1) <= NOT w_seg(5);
+    o_seg_n(2) <= NOT w_seg(4);
+    o_seg_n(3) <= NOT w_seg(3);
+    o_seg_n(4) <= NOT w_seg(2);
+    o_seg_n(5) <= NOT w_seg(1);
+    o_seg_n(6) <= NOT w_seg(0);
 end Behavioral;
