@@ -50,7 +50,7 @@ architecture test_bench of sevenseg_decoder_tb is
 begin
 
 -- PORT maps
-    sevenseg_decoder_uut : sevenseg_decoder port map (
+    top_basys3_uut : sevenseg_decoder port map (
         i_Hex   => i_Hex,
         o_seg_n => o_seg_n
     );
