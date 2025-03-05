@@ -89,7 +89,7 @@ architecture top_basys3_arch of top_basys3 is
   
 begin
 	-- PORT MAPS ----------------------------------------
-    sevenseg_decoder_0 : sevenseg_decoder port map (
+    sevenseg_decoder_uut : sevenseg_decoder port map (
         i_Hex   => sw,
         o_seg_n => seg
     );
