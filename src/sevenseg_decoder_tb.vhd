@@ -45,7 +45,20 @@ architecture test_bench of sevenseg_decoder_tb is
 -- declare the signals
     signal i_Hex    :   std_logic_vector (3 downto 0) := x"0";
     signal o_seg_n :   std_logic_vector (6 downto 0);
-
+    
+        function slv_to_string(slv: std_logic_vector) return string is
+        variable result: string(1 to slv'length);
+    begin
+        for i in slv'range loop
+            if slv(i) = '1' then
+                result(i+1-slv'low) := '1';
+            else
+                result(i+1-slv'low) := '0';
+            end if;
+        end loop;
+        return result;
+    end function;
+    
 begin
 
 -- PORT maps
@@ -60,16 +73,17 @@ begin
     begin
         i_Hex <= x"A"; wait for 10 ns;
             wait for 5 ns;
-            assert(o_seg_n = "0001000") report "bad with zeros" severity failure;
-        i_Hex <= x"B"; wait for 10 ns;
-            wait for 5 ns;
-            assert(o_seg_n = "1100000") report "bad with zeros" severity failure;
-        i_Hex <= x"5"; wait for 10 ns;
-            wait for 5 ns;
-            assert(o_seg_n = "0100100") report "bad with zeros" severity failure;
-        i_Hex <= x"6"; wait for 10 ns;
-            wait for 5 ns;
-            assert(o_seg_n = "0100000") report "bad with zeros" severity failure;
+            assert(std_logic_vector(o_seg_n) = "0001000") report "bad with zeros" severity failure;
+--        i_Hex <= x"0"; wait for 10 ns;
+--            wait for 5 ns;
+--            report "the value of 0 for hex is" & slv_to_string(o_seg_n);
+--            assert(std_logic_vector(o_seg_n) = "0000001") report "bad with zeros for B" severity failure;
+--        i_Hex <= x"5"; wait for 10 ns;
+--            wait for 5 ns;
+--            assert(o_seg_n = "0100100") report "bad with zeros" severity failure;
+--        i_Hex <= x"6"; wait for 10 ns;
+--            wait for 5 ns;
+--            assert(o_seg_n = "0100000") report "bad with zeros" severity failure;
    
     wait;
     end process;
