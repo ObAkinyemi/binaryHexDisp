@@ -59,12 +59,16 @@ begin
    
     begin
         i_Hex <= x"A"; wait for 10 ns;
+            wait for 5 ns;
             assert(o_seg_n = "0001000") report "bad with zeros" severity failure;
         i_Hex <= x"B"; wait for 10 ns;
+            wait for 5 ns;
             assert(o_seg_n = "1100000") report "bad with zeros" severity failure;
         i_Hex <= x"5"; wait for 10 ns;
+            wait for 5 ns;
             assert(o_seg_n = "0100100") report "bad with zeros" severity failure;
         i_Hex <= x"6"; wait for 10 ns;
+            wait for 5 ns;
             assert(o_seg_n = "0100000") report "bad with zeros" severity failure;
    
     wait;
